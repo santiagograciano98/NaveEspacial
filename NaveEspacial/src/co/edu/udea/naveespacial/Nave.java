@@ -3,6 +3,7 @@ package co.edu.udea.naveespacial;
 public class Nave {
 
     private Familia[][] nave;
+    private Desastre desastres;
 
     public Nave() {
         this.nave = new Familia[5][5];
@@ -49,6 +50,8 @@ public class Nave {
     public void aplicarFuga() {
         //se expulsa de la nave a las tres personas mas viejas
         System.out.println("fuga");
+        this.nave = this.desastres.fugaDeAire(nave);
+        
     }
 
     public void consultarMatriz() {
