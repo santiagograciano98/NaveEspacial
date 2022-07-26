@@ -93,7 +93,7 @@ public class Main {
                     if(probabilidad <= 0.1){
                         nave.aplicarColision();
                     }else if(probabilidad > 0.1 && probabilidad <= 0.5){
-                        nave.aplicarLocura();
+                        nave.aplicarLocura(i);
                     }else if(probabilidad > 0.5){
                         nave.aplicarFuga();
                     }
@@ -104,8 +104,8 @@ public class Main {
             }
             
         }
+        
        
-        //System.out.println("La probabilidad es: " + nave.probabilidadCatastrofe());
 
     }
 

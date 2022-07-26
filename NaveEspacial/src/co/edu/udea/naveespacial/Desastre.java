@@ -74,4 +74,35 @@ public class Desastre {
         return nave;
     }
     
+     public Familia[][] aplicarDesastreLocura(Familia[][] nave, int tickMuerte){
+        
+        System.out.println("aplica locura");
+        boolean validacion = true;
+        do {
+            int posicionFila = this.obtenerRandomFamilia();
+            int posicionColumna = this.obtenerRandomFamilia();
+            
+            boolean estadoFamilia = nave[posicionFila][posicionColumna].isEstado();
+            if (estadoFamilia) {
+                for (int i = 0; i < nave[posicionFila][posicionColumna].getFamilia().size(); i++) {
+                    nave[posicionFila][posicionColumna].getFamilia().get(i).setCausaMuerte("Muerte por locura");
+                    nave[posicionFila][posicionColumna].getFamilia().get(i).setTickMuerte(tickMuerte);
+                    nave[posicionFila][posicionColumna].getFamilia().get(i).setEstado(false);
+                }
+                nave[posicionFila][posicionColumna].setEstado(false);
+                validacion = false;
+            }
+
+        } while (validacion == true);
+        
+        return nave;
+    }
+     
+     public int obtenerRandomFamilia() {
+        int min = 0;
+        int max = 4;
+
+        return (int) Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    
 }

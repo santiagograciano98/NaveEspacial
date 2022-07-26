@@ -5,6 +5,8 @@ public class Persona {
     private String nombre;
     private int edad;
     private boolean estado;
+    private int tickMuerte;
+    private String causaMuerte;
 
     public Persona() {
     }
@@ -29,6 +31,22 @@ public class Persona {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public int getTickMuerte() {
+        return tickMuerte;
+    }
+
+    public void setTickMuerte(int tickMuerte) {
+        this.tickMuerte = tickMuerte;
+    }
+
+    public String getCausaMuerte() {
+        return causaMuerte;
+    }
+
+    public void setCausaMuerte(String causaMuerte) {
+        this.causaMuerte = causaMuerte;
     }
 
     @Override
