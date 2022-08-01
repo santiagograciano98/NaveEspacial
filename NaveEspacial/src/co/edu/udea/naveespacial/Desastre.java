@@ -98,6 +98,37 @@ public class Desastre {
         return nave;
     }
      
+     public Familia[][] ColisionConAsteroide(Familia[][] familias){
+        int cuadrante, fila, columna, muertes;
+        ArrayList<Persona> familia;
+        Persona persona;
+
+        cuadrante = (int)(Math.random()*4);
+        fila = cuadrante;
+        columna = cuadrante;
+        muertes = 0;
+
+        for (int k = 0; k < 6; k++){
+            familia = familias[fila][columna].getFamilia();
+            for (int n = 0; n < familia.size(); n++){
+                persona = familia.get(n);
+                if (persona.getEstado() == true){
+                    persona.setEstado(false);
+                    muertes++;
+                }
+            }
+            columna++;
+            if (columna == 5){
+                columna = 0;
+                fila++;
+            }
+        }
+
+        System.out.println(muertes + " personas murieron debido a la colisión de un asteroide en el cuadrante " + cuadrante);
+
+        return familias;
+    }
+     
      public int obtenerRandomFamilia() {
         int min = 0;
         int max = 4;

@@ -33,6 +33,8 @@ public class Nave {
 
     public void aplicarColision() {
         System.out.println("colision");
+         Desastre desastres1 = new Desastre();
+        this.nave = desastres1.ColisionConAsteroide(nave);
     }
 
     public void aplicarFuga() {
@@ -43,9 +45,12 @@ public class Nave {
         
     }
 
-    public void consultarMatriz() {
-        System.out.println(this.nave[0][0]);
-        System.out.println(this.nave[4][4]);
+   public void consultarMatriz() {
+        for (int i = 0; i < this.nave.length; i++) {
+            for (int j = 0; j < this.nave[i].length; j++) {
+                System.out.println(this.nave[i][j]);
+            }
+        }
 
     }
 

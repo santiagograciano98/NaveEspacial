@@ -3,47 +3,77 @@ package co.edu.udea.naveespacial;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class LeerArchivo {
 
-    public void crearFamilia() {
+    static void crearNave(Nave nave) {
         JSONParser parser = new JSONParser();
-        Persona persona;
-        Familia familia = null;
+        Persona persona = null;
 
         try {
-
             Object obj = parser.parse(new FileReader("C:\\Users\\Santiago Graciano\\Documents\\NetBeansProjects\\NaveEspacial\\src\\co\\edu\\udea\\naveespacial\\prueba.json"));
             JSONObject jsonObject = (JSONObject) obj;
-            System.out.println("JSON LEIDO: " + jsonObject);
+            for (int i = 1; i <= 25; i++) {
+                ArrayList<Persona> listaFamilia = new ArrayList<>();
+                String valorFamilia = "Familia" + Integer.toString(i);
+                JSONArray array = (JSONArray) jsonObject.get(valorFamilia);
 
-            JSONArray array = (JSONArray) jsonObject.get("Personas");
-            System.out.println(array.size());
+                for (int j = 0; j < array.size(); j++) {
+                    JSONObject jsonObject1 = (JSONObject) array.get(j);
+                    persona = new Persona(jsonObject1.get("nombre").toString(), Integer.parseInt(jsonObject1.get("edad").toString()), true);
+                    listaFamilia.add(persona);
+                }
+                Familia familia = new Familia(listaFamilia, true);
 
-            for (int i = 0; i < array.size(); i++) {
-                JSONObject jsonObject1 = (JSONObject) array.get(i);
+                //almacenar datos en la matriz
+                int operacionModulo = i % 5;
 
-                System.out.println("DATOS DEL USUARIO: " + i);
-                System.out.println("IDFamilia: " + jsonObject1.get("idFamilia"));
-                System.out.println("Nombre: " + jsonObject1.get("nombre"));
-                System.out.println("edad: " + jsonObject1.get("edad"));
+                if (i <= 5) {
+                    if (operacionModulo != 0) {
+                        nave.agregarFamiliaEnNave(familia, 0, operacionModulo - 1);
+                    } else {
+                        nave.agregarFamiliaEnNave(familia, 0, 4);
+                    }
 
-                
-                persona = new Persona(jsonObject1.get("nombre").toString(), Integer.parseInt(jsonObject1.get("edad").toString()), true);
-                System.out.println("");
+                } else if (i > 5 && i <= 10) {
+                    if (operacionModulo != 0) {
+                        nave.agregarFamiliaEnNave(familia, 1, operacionModulo - 1);
+                    } else {
+                        nave.agregarFamiliaEnNave(familia, 1, 4);
+                    }
+                } else if (i > 10 && i <= 15) {
+                    if (operacionModulo != 0) {
+                        nave.agregarFamiliaEnNave(familia, 2, operacionModulo - 1);
+                    } else {
+                        nave.agregarFamiliaEnNave(familia, 2, 4);
+                    }
+                } else if (i > 15 && i <= 20) {
+                    if (operacionModulo != 0) {
+                        nave.agregarFamiliaEnNave(familia, 3, operacionModulo - 1);
+                    } else {
+                        nave.agregarFamiliaEnNave(familia, 3, 4);
+                    }
+                } else if (i > 20 && i <= 25) {
+                    if (operacionModulo != 0) {
+                        nave.agregarFamiliaEnNave(familia, 4, operacionModulo - 1);
+                    } else {
+                        nave.agregarFamiliaEnNave(familia, 4, 4);
+                    }
+                }
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("hola");
+            System.out.println("Error. no se encontro el archivo " + e);
         } catch (IOException e) {
-            System.out.println("hola 1");
-        } catch (ParseException e) {
-            System.out.println("hola 2");
-        };
+            System.out.println("Input Output error " + e);
+        } catch (Exception e) {
+            System.out.println("Ocurrio un error en el programa " + e);
+        }
+
     }
 
 }
