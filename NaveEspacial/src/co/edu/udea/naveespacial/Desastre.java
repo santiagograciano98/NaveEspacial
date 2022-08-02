@@ -37,7 +37,9 @@ public class Desastre {
         return familias;
     }
 
-    public Familia[][] fugaDeAire (Familia[][] nave){
+    public Familia[][] fugaDeAire (Familia[][] nave, int tickMuerte){
+
+        //System.out.println("Probando que el métod esté actualizado");
 
         //Guardando ubicación de las tres personas más viejas.
         int[][] tresMasViejos = new int[3][3];
@@ -94,22 +96,33 @@ public class Desastre {
         //Próximo paso: eliminar.
 
         //Eliminando primera persona:
+        //Añadiendo un print solo aquí para controlar qué hace.
+        //System.out.println("Pre-muerte: " + nave[tresMasViejos[0][0]][tresMasViejos[0][1]].getFamilia());
         personas = nave[tresMasViejos[0][0]][tresMasViejos[0][1]].getFamilia();
         personas.get(tresMasViejos[0][2]).setEstado(false);
+        personas.get(tresMasViejos[0][2]).setTickMuerte(tickMuerte);
+        personas.get(tresMasViejos[0][2]).setCausaMuerte("Muerte por fuga de aire.");
         nave[tresMasViejos[0][0]][tresMasViejos[0][1]] = new Familia(personas, true);
+        //System.out.println("Pos-muerte: " + personas);
 
 
         //Eliminando segunda persona:
         personas = nave[tresMasViejos[1][0]][tresMasViejos[1][1]].getFamilia();
         personas.get(tresMasViejos[1][2]).setEstado(false);
+        personas.get(tresMasViejos[1][2]).setTickMuerte(tickMuerte);
+        personas.get(tresMasViejos[1][2]).setCausaMuerte("Muerte por fuga de aire.");
         nave[tresMasViejos[1][0]][tresMasViejos[1][1]] = new Familia(personas, true);
 
 
         //Eliminando tercera persona:
         personas = nave[tresMasViejos[2][0]][tresMasViejos[2][1]].getFamilia();
         personas.get(tresMasViejos[2][2]).setEstado(false);
+        personas.get(tresMasViejos[2][2]).setTickMuerte(tickMuerte);
+        personas.get(tresMasViejos[2][2]).setCausaMuerte("Muerte por fuga de aire.");
         nave[tresMasViejos[2][0]][tresMasViejos[2][1]] = new Familia(personas, true);
 
+
+        System.out.println("\n\n");
         return nave;
     }
     

@@ -23,7 +23,7 @@ public class Main {
                         //nave.aplicarLocura(i);
                         continue;
                     } else if (probabilidad > 0.5) {
-                        nave.aplicarFuga();
+                        nave.aplicarFuga(i);
                     }
                 }
             }

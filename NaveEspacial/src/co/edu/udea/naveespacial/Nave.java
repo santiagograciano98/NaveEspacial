@@ -37,11 +37,11 @@ public class Nave {
         this.nave = desastres1.ColisionConAsteroide(nave, tickMuerte);
     }
 
-    public void aplicarFuga() {
+    public void aplicarFuga(int tickMuerte) {
         //se expulsa de la nave a las tres personas mas viejas
         System.out.println("fuga");
         Desastre desastres1 = new Desastre();
-        this.nave = desastres1.fugaDeAire(this.nave);
+        this.nave = desastres1.fugaDeAire(this.nave, tickMuerte);
         
     }
 
