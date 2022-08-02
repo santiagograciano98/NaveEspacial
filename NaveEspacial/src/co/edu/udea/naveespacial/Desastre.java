@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Desastre {
 
-    public Familia[][] ColisionConAsteroide(Familia[][] familias){
+    public Familia[][] ColisionConAsteroide(Familia[][] familias, int tickMuerte){
         int cuadrante, fila, columna, muertes;
         ArrayList<Persona> familia;
         Persona persona;
@@ -20,6 +20,8 @@ public class Desastre {
                 persona = familia.get(n);
                 if (persona.getEstado() == true){
                     persona.setEstado(false);
+                    persona.setTickMuerte(tickMuerte);
+                    persona.setCausaMuerte("Colisión con un asteroide");
                     muertes++;
                 }
             }

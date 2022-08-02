@@ -31,10 +31,10 @@ public class Nave {
 
     }
 
-    public void aplicarColision() {
+    public void aplicarColision(int tickMuerte) {
         System.out.println("colision");
          Desastre desastres1 = new Desastre();
-        this.nave = desastres1.ColisionConAsteroide(nave);
+        this.nave = desastres1.ColisionConAsteroide(nave, tickMuerte);
     }
 
     public void aplicarFuga() {

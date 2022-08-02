@@ -17,7 +17,7 @@ public class Main {
                 if (probabilidad <= 0.4) {
                     probabilidad = nave.probabilidadCatastrofe();
                     if (probabilidad <= 0.1) {
-                        nave.aplicarColision();
+                        nave.aplicarColision(i);
                     } else if (probabilidad > 0.1 && probabilidad <= 0.5) {
                         nave.aplicarLocura(i);
                     } else if (probabilidad > 0.5) {
