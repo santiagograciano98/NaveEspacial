@@ -15,7 +15,7 @@ public class LeerArchivo {
         Persona persona = null;
 
         try {
-            Object obj = parser.parse(new FileReader("C:\\Users\\Santiago Graciano\\Documents\\NetBeansProjects\\NaveEspacial\\src\\co\\edu\\udea\\naveespacial\\prueba.json"));
+            Object obj = parser.parse(new FileReader("C:\\Universidad de Antioquia\\Nivel 4\\Lógica III\\Practica_Uno\\NaveEspacial\\src\\co\\edu\\udea\\naveespacial\\prueba.json"));
             JSONObject jsonObject = (JSONObject) obj;
             for (int i = 1; i <= 25; i++) {
                 ArrayList<Persona> listaFamilia = new ArrayList<>();

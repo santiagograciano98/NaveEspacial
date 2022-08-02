@@ -17,11 +17,13 @@ public class Main {
                 if (probabilidad <= 0.4) {
                     probabilidad = nave.probabilidadCatastrofe();
                     if (probabilidad <= 0.1) {
-                        nave.aplicarColision(i);
+                        //nave.aplicarColision(i);
+                        continue;
                     } else if (probabilidad > 0.1 && probabilidad <= 0.5) {
-                        nave.aplicarLocura(i);
+                        //nave.aplicarLocura(i);
+                        continue;
                     } else if (probabilidad > 0.5) {
-                        //nave.aplicarFuga();
+                        nave.aplicarFuga();
                     }
                 }
             }
