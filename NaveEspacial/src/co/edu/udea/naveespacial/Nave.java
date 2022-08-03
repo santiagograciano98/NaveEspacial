@@ -31,17 +31,17 @@ public class Nave {
 
     }
 
-    public void aplicarColision() {
+    public void aplicarColision(int tickMuerte) {
         System.out.println("colision");
          Desastre desastres1 = new Desastre();
-        this.nave = desastres1.ColisionConAsteroide(nave);
+        this.nave = desastres1.ColisionConAsteroide(nave, tickMuerte);
     }
 
-    public void aplicarFuga() {
+    public void aplicarFuga(int tickMuerte) {
         //se expulsa de la nave a las tres personas mas viejas
         System.out.println("fuga");
         Desastre desastres1 = new Desastre();
-        this.nave = this.desastres.fugaDeAire(nave);
+        this.nave = desastres1.fugaDeAire(this.nave, tickMuerte);
         
     }
 

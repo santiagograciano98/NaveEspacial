@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Desastre {
 
-    public Familia[][] ColisionConAsteroide(Familia[][] familias){
+    public Familia[][] ColisionConAsteroide(Familia[][] familias, int tickMuerte){
         int cuadrante, fila, columna, muertes;
         ArrayList<Persona> familia;
         Persona persona;
@@ -20,6 +20,8 @@ public class Desastre {
                 persona = familia.get(n);
                 if (persona.getEstado() == true){
                     persona.setEstado(false);
+                    persona.setTickMuerte(tickMuerte);
+                    persona.setCausaMuerte("Colisión con un asteroide");
                     muertes++;
                 }
             }
@@ -35,41 +37,49 @@ public class Desastre {
         return familias;
     }
 
-    public Familia[][] fugaDeAire (Familia[][] nave){
+    public Familia[][] fugaDeAire (Familia[][] nave, int tickMuerte){
+
+        //System.out.println("Probando que el métod esté actualizado");
 
         //Guardando ubicación de las tres personas más viejas.
         int[][] tresMasViejos = new int[3][3];
         int edadPrimero = 0, edadSegundo = 0, edadTercero = 0;
         
+        ArrayList<Persona> personas = new ArrayList<>();
 
         //Recorriendo la matriz en búsqueda de las personas. 
         for (int fila = 0; fila < nave.length; fila++){
             for (int columna = 0; columna < nave[0].length; columna++){
 
-                ArrayList<Persona> personas = nave[fila][columna].getFamilia();
+                personas = nave[fila][columna].getFamilia();
+
                 int contador = 0;
                 
                 for (Persona persona : personas){
-                    if (persona.getEdad() > edadPrimero){
-                        edadPrimero = persona.getEdad();
-                        tresMasViejos[0][0] = fila;
-                        tresMasViejos[0][1] = columna;
-                        tresMasViejos[0][2] = contador;
-                    } else {
-                        if (persona.getEdad() > edadSegundo && persona.getEdad() <= edadPrimero){
-                            edadSegundo = persona.getEdad();
-                            tresMasViejos[1][0] = fila;
-                            tresMasViejos[1][1] = columna;
-                            tresMasViejos[1][2] = contador;
-                        } else{
-                            if (persona.getEdad() > edadTercero && persona.getEdad() <= edadSegundo){
-                                edadTercero = persona.getEdad();
-                                tresMasViejos[2][0] = fila;
-                                tresMasViejos[2][1] = columna;
-                                tresMasViejos[2][2] = contador;
+
+                    if (persona.getEstado()){
+                        if (persona.getEdad() > edadPrimero){
+                            edadPrimero = persona.getEdad();
+                            tresMasViejos[0][0] = fila;
+                            tresMasViejos[0][1] = columna;
+                            tresMasViejos[0][2] = contador;
+                        } else {
+                            if (persona.getEdad() > edadSegundo && persona.getEdad() <= edadPrimero){
+                                edadSegundo = persona.getEdad();
+                                tresMasViejos[1][0] = fila;
+                                tresMasViejos[1][1] = columna;
+                                tresMasViejos[1][2] = contador;
+                            } else{
+                                if (persona.getEdad() > edadTercero && persona.getEdad() <= edadSegundo){
+                                    edadTercero = persona.getEdad();
+                                    tresMasViejos[2][0] = fila;
+                                    tresMasViejos[2][1] = columna;
+                                    tresMasViejos[2][2] = contador;
+                                }
                             }
                         }
                     }
+                    
                     contador++;
                 }
 
@@ -86,22 +96,33 @@ public class Desastre {
         //Próximo paso: eliminar.
 
         //Eliminando primera persona:
-        ArrayList<Persona> personas = nave[tresMasViejos[0][0]][tresMasViejos[0][1]].getFamilia();
-        personas.remove(tresMasViejos[0][2]);
+        //Añadiendo un print solo aquí para controlar qué hace.
+        //System.out.println("Pre-muerte: " + nave[tresMasViejos[0][0]][tresMasViejos[0][1]].getFamilia());
+        personas = nave[tresMasViejos[0][0]][tresMasViejos[0][1]].getFamilia();
+        personas.get(tresMasViejos[0][2]).setEstado(false);
+        personas.get(tresMasViejos[0][2]).setTickMuerte(tickMuerte);
+        personas.get(tresMasViejos[0][2]).setCausaMuerte("Muerte por fuga de aire.");
         nave[tresMasViejos[0][0]][tresMasViejos[0][1]] = new Familia(personas, true);
+        //System.out.println("Pos-muerte: " + personas);
 
 
         //Eliminando segunda persona:
         personas = nave[tresMasViejos[1][0]][tresMasViejos[1][1]].getFamilia();
-        personas.remove(tresMasViejos[1][2]);
+        personas.get(tresMasViejos[1][2]).setEstado(false);
+        personas.get(tresMasViejos[1][2]).setTickMuerte(tickMuerte);
+        personas.get(tresMasViejos[1][2]).setCausaMuerte("Muerte por fuga de aire.");
         nave[tresMasViejos[1][0]][tresMasViejos[1][1]] = new Familia(personas, true);
 
 
         //Eliminando tercera persona:
         personas = nave[tresMasViejos[2][0]][tresMasViejos[2][1]].getFamilia();
-        personas.remove(tresMasViejos[2][2]);
+        personas.get(tresMasViejos[2][2]).setEstado(false);
+        personas.get(tresMasViejos[2][2]).setTickMuerte(tickMuerte);
+        personas.get(tresMasViejos[2][2]).setCausaMuerte("Muerte por fuga de aire.");
         nave[tresMasViejos[2][0]][tresMasViejos[2][1]] = new Familia(personas, true);
 
+
+        System.out.println("\n\n");
         return nave;
     }
     
